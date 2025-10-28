@@ -9,41 +9,33 @@ if (!$con) {
 }
 
 //insertar
-function insertar($query, $datos){
+function insertar($query, $datos = []) {
     global $con;
-    $prepare = pg_prepare($con, "insert", $query);
-    $result = pg_execute($con, "insert", $datos);
-
-    return $result;
+    return pg_query_params($con, $query, $datos);
 }
 
 //eliminar
-function eliminar($query, $datos){
+function eliminar($query, $datos = []) {
     global $con;
-    $prepare = pg_prepare($con, "delete", $query);
-    $result = pg_execute($con, "delete", $datos);
-
-    return $result;
+    return pg_query_params($con, $query, $datos);
 }
 
 //modificar
-function modificar($query, $datos){
+function modificar($query, $datos = []) {
     global $con;
-    $prepare = pg_prepare($con, "update", $query);
-    $result = pg_execute($con, "update", $datos);
-
-    return $result;
+    return pg_query_params($con, $query, $datos);
 }
 
 //seleccionar
-function seleccionar($query, $datos){
+function seleccionar($query, $datos = []) {
     global $con;
-    $prepare = pg_prepare($con, "select", $query);
-    $result = pg_execute($con, "select", $datos);
-
+    $result = pg_query_params($con, $query, $datos);
+    if (!$result) {
+        echo "Error en la consulta: " . pg_last_error($con);
+        return [];
+    }
     $data = pg_fetch_all($result);
-
-    return $data;
+    return $data ?: []; 
 }
 
 ?>

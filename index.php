@@ -1,9 +1,10 @@
 <?php
+
 include("conexion.php"); 
 
 $alumnos = seleccionar("
     SELECT a.id_alumno, a.nombre AS alumno, a.grado, a.promedio,
-           m.nombre AS materia, c.calificacion, c.fecha, c.id_calificacion
+           c.id_calificacion, c.id_materia, c.calificacion, c.fecha, m.nombre AS materia
     FROM alumnos a
     LEFT JOIN calificaciones c ON a.id_alumno = c.id_alumno
     LEFT JOIN materias m ON c.id_materia = m.id_materia
@@ -40,8 +41,8 @@ $alumnos = seleccionar("
             </tr>
         </thead>
         <tbody>
-
         <?php
+
             if ($alumnos && count($alumnos) > 0) {
                 foreach ($alumnos as $fila) {
                     echo "<tr>";
@@ -50,11 +51,20 @@ $alumnos = seleccionar("
                     echo "<td>".$fila['materia']."</td>";
                     echo "<td>".$fila['calificacion']."</td>";
                     echo "<td>".$fila['fecha']."</td>";
-                    echo "<td>
-                            <a href='editar.php?id=".$fila['id_calificacion']."' class='btn btn-primary btn-sm'>Editar</a>
-                            <a href='eliminar.php?id=".$fila['id_calificacion']."' class='btn btn-danger btn-sm'>Eliminar</a>
-                          </td>";
-                    echo "</tr>";
+
+                    echo "<td>";
+                    if (!empty($fila['id_calificacion'])) {
+                        //editar y elimar calificacion ya existente :)
+                        echo "<a href='editar.php?id=".$fila['id_calificacion']."' class='btn btn-primary btn-sm me-1'>Editar</a>";
+                        echo "<a href='eliminar.php?id=".$fila['id_calificacion']."' class='btn btn-danger btn-sm'>Eliminar</a>";
+                    } else {
+                        //boton para agregar calificacion de alumno existente :)
+                        echo "<a href='editar.php?id_alumno=".$fila['id_alumno']."' class='btn btn-primary btn-sm'>Agregar Calificacion</a>";
+                    }
+                 echo "</td>";
+
+                 echo "</tr>";
+
                 }
             } else {
                 echo "<tr><td colspan='6' class='text-center'>No hay registros</td></tr>";
