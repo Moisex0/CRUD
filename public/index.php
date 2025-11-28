@@ -56,7 +56,7 @@ $alumnos = seleccionar("
                     if (!empty($fila['id_calificacion'])) {
                         //editar y elimar calificacion ya existente :)
                         echo "<a href='editar.php?id=".$fila['id_calificacion']."' class='btn btn-primary btn-sm me-1'>Editar</a>";
-                        echo "<a href='eliminar.php?id=".$fila['id_calificacion']."' class='btn btn-danger btn-sm'>Eliminar</a>";
+                        echo "<a href='eliminar.php?id=".$fila['id_alumno']."' class='btn btn-danger btn-sm'>Eliminar</a>";
                     } else {
                         //boton para agregar calificacion de alumno existente :)
                         echo "<a href='editar.php?id_alumno=".$fila['id_alumno']."' class='btn btn-primary btn-sm'>Agregar Calificacion</a>";

@@ -3,12 +3,12 @@
 include("conexion.php");
 
 //obtener el id de la calificación :)
-$id_calificacion = $_GET['id'] ?? null;
+$id_alumno = $_GET['id'] ?? null;
 
-if ($id_calificacion) {
+if ($id_alumno) {
     //esto elimina la calificacion directamente :)
-    $query = "DELETE FROM calificaciones WHERE id_calificacion = $1";
-    $resultado = eliminar($query, [$id_calificacion]);
+    $query = "DELETE FROM alumnos WHERE id_alumno = $1";
+    $resultado = eliminar($query, [$id_alumno]);
 
     if (!$resultado) {
         echo "error al eliminar: " . pg_last_error($con);

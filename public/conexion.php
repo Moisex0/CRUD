@@ -1,7 +1,7 @@
 <?php
 
 //conexion
-$con = pg_connect("host=dpg-d4kt6j8gjchc73adbf0g-a port=5432 user=sistemaalumnos password=G64P48FzjRsysZNnjIyVWLBLXaSurw8h dbname=sistemaalumnos");
+$con = pg_connect("host=localhost port=5432 user=postgres password=msh79000 dbname=sistema_alumnos");
 
 if (!$con) {
     echo "No se pudo conectar con la base de datos :( " . pg_last_error();
