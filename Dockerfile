@@ -1,17 +1,16 @@
-# Imagen base con PHP 8 y Apache
 FROM php:8.2-apache
 
-# Habilitar extensiones necesarias de PHP (por ejemplo mysqli)
-RUN docker-php-ext-install mysqli
+# Instalar dependencias necesarias y extensiones de PostgreSQL
+RUN apt-get update && apt-get install -y libpq-dev \
+    && docker-php-ext-install pgsql pdo pdo_pgsql
 
-# Habilitar mod_rewrite (si más adelante lo necesitas)
+# Habilitar mod_rewrite (opcional)
 RUN a2enmod rewrite
 
-# Copiar los archivos públicos dentro del contenedor
+# Copiar tu proyecto al contenedor
 COPY public/ /var/www/html/
 
-# Dar permisos a Apache
+# Dar permisos
 RUN chown -R www-data:www-data /var/www/html
 
-# Exponer el puerto 80
 EXPOSE 80
