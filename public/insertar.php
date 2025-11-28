@@ -84,6 +84,6 @@ if ($id_alumno && !empty($materia) && !empty($calificacion)) {
         <a href="index.php" class="btn btn-secondary">Cancelar</a>
     </form>
 </div>
-<script src="public/js/bootstrap.bundle.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
